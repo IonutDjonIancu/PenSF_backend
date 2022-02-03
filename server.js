@@ -11,16 +11,14 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
-// database
-// const db = knex({
-//     client: 'pg',
-//     connection: {
-//         host: '127.0.0.1',
-//         user: 'postgres',
-//         password: '1234',
-//         database: 'PenSF'
-//     }
-// });
+//database
+const db = knex({
+    client: 'pg',
+    connection: {
+        connectionString: process.env.DATABASE_URL,
+        ssl: true,
+    }
+});
 // serve
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
