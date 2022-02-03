@@ -22,8 +22,10 @@ const db = knex({
     }
 });
 // serve
-const PORT = process.env.PORT;
-app.listen(PORT);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`app is running on port: ${PORT}`);
+});
 
 
 
