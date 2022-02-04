@@ -9,6 +9,7 @@ const registerController = require('./controllers/register.js');
 // middleware
 const app = express();
 app.use(cors());
+app.options('*', cors())
 
 
 app.use(express.urlencoded({extended: false}));
@@ -31,7 +32,6 @@ app.listen(PORT, () => {
 });
 
 
-
 // root
 app.get('/', (req, res) => {
     res.status(200).json('welcome');
@@ -45,7 +45,7 @@ app.get('/ok', (req, res) => {
 app.post('/register', (req, res) => { registerController.handleRegister(req, res, db, bcrypt) });
 
 // signin
-app.post('/signin', cors(), (req, res) => { signInController.handleSignIn(req, res, db, bcrypt); });
+app.post('/signin', (req, res) => { signInController.handleSignIn(req, res, db, bcrypt); });
 
 // profile
 app.get('/profile/:id', (req, res) => {
