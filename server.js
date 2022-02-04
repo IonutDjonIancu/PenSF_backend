@@ -12,7 +12,7 @@ app.use(cors());
 app.options('*', cors())
 
 
-// app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 //database
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -45,7 +45,7 @@ app.get('/ok', (req, res) => {
 app.post('/register', (req, res) => { registerController.handleRegister(req, res, db, bcrypt) });
 
 // signin
-app.post('/signin', (req, res) => { signInController.handleSignIn(req, res, db, bcrypt); });
+app.post('/signin', cors(), (req, res) => { signInController.handleSignIn(req, res, db, bcrypt); });
 
 // profile
 app.get('/profile/:id', (req, res) => {
